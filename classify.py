@@ -33,7 +33,7 @@ def plot_decision_regions(X, y, classifier, resolution=0.02):
         
                            
 
-df = pd.read_csv(r"C:\Users\manik\OneDrive\Documents\GitHub\Python-Machine-Learning-Second-Edition\Chapter02\iris.data", header=None)
+df = pd.read_csv(r"datasets\iris.data", header=None)
 print(df.tail())
 
 #select setosa and versicolor
