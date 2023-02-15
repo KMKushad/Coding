@@ -37,6 +37,8 @@ def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
 
         plt.scatter(X_test[:, 0], X_test[:, 1],
                     c='', edgecolor='black', alpha=1.0,
+                    linewidth=1, marker='o', s=100, 
+                    label='test set'
                     )
 
 sc = StandardScaler()
@@ -56,4 +58,9 @@ X_test_std = sc.transform(X_test)
 ppn.fit(X_train_std, y_train)
 y_pred = ppn.predict(X_test_std)
 print('Misclassified samples: %d' % (y_test != y_pred).sum())
-print('Accuracy: %.2f' % ppn.score(X_test_std, y_test))
+print('Accuracy: %.2f' % accuracy_score(y_test, y_pred))
+
+X_combined_std = np.vstack((X_train_std, X_test_std))
+y_combined = np.hstack((y_train, y_test))
+
+plot_decision_regions(X=X_combined_std, y=y_combined, )
