@@ -20,7 +20,7 @@ def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
     xx1, xx2 = np.meshgrid(np.arange(x1_min, x1_max, resolution), 
                            np.arange(x2_min, x2_max, resolution))
     Z = classifier.predict(np.array([xx1.ravel(), xx2.ravel()]).T)
-    Z.reshape(xx1.shape)
+    Z = Z.reshape(xx1.shape)
     plt.contourf(xx1, xx2, Z, alpha=0.3, cmap=cmap)
     plt.xlim(xx1.min(), xx1.max())
     plt.ylim(xx2.min(), xx2.max())
@@ -36,7 +36,7 @@ def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
         X_test, y_test = X[test_idx, :], y[test_idx]
 
         plt.scatter(X_test[:, 0], X_test[:, 1],
-                    c='', edgecolor='black', alpha=1.0,
+                    edgecolor='black', alpha=0.3,
                     linewidth=1, marker='o', s=100, 
                     label='test set'
                     )
@@ -63,4 +63,5 @@ print('Accuracy: %.2f' % accuracy_score(y_test, y_pred))
 X_combined_std = np.vstack((X_train_std, X_test_std))
 y_combined = np.hstack((y_train, y_test))
 
-plot_decision_regions(X=X_combined_std, y=y_combined, )
+plot_decision_regions(X=X_combined_std, y=y_combined, classifier=ppn, test_idx=range(105, 150))
+plt.show()
