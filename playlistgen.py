@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# Sample Python code for youtube.channels.list
-# See instructions for running these code samples locally:
-# https://developers.google.com/explorer-help/code-samples#python
-
 import os
 import time
 
@@ -28,12 +22,12 @@ credentials = flow.run_console()
 youtube = googleapiclient.discovery.build(
     api_service_name, api_version, credentials=credentials)
 
-def addToPlaylist(video_id):
+def addToPlaylist(video_id, playlist_id):
     request = youtube.playlistItems().insert(
         part="snippet",
         body={
           "snippet": {
-            "playlistId": "PLPE3jYWp3YNKZZ0Ry4W-Z02SBC3ulY-kF",
+            "playlistId": playlist_id,
             "resourceId": {
               "kind": "youtube#video",
               "videoId": video_id
@@ -59,14 +53,33 @@ def search(topic):
 
     return id
 
+def makePlaylist():
+    request = youtube.playlists().insert(
+        part="snippet,status",
+        body={
+          "snippet": {
+            "title": "API Generated",
+            "description": "This was made by KMKushad's Playlist Generator",
+            "defaultLanguage": "en"
+          },
+          "status": {
+            "privacyStatus": "public"
+          }
+        }
+    )
+    response = request.execute()
+
+    return response['id']
+
 def main():
+    playlistId = makePlaylist()
 
     input = open("input.txt", "r")
 
     for line in input.readlines():
         print(line)
         id = search(line)
-        addToPlaylist(id)
+        addToPlaylist(id, playlistId)
         time.sleep(0.5)
     
     input.close()
