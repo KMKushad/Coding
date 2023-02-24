@@ -24,7 +24,7 @@ youtube = googleapiclient.discovery.build(
 
 def addToPlaylist(video_id, playlist_id):
     """
-    Add a video to a specified playlist
+    Add a video to a specified playlist.
     """
     request = youtube.playlistItems().insert(
         part="snippet",
@@ -43,6 +43,9 @@ def addToPlaylist(video_id, playlist_id):
     print(response)
 
 def search(topic):
+    """
+    Search up videos in a specified topic.
+    """
     request = youtube.search().list(
         part="snippet",
         maxResults=1,
@@ -57,6 +60,9 @@ def search(topic):
     return id
 
 def makePlaylist():
+    """
+    Make a playlist and return the id. 
+    """
     request = youtube.playlists().insert(
         part="snippet,status",
         body={
