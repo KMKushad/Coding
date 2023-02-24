@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# Sample Python code for youtube.channels.list
-# See instructions for running these code samples locally:
-# https://developers.google.com/explorer-help/code-samples#python
-
 import os
 import time
 
@@ -29,6 +23,9 @@ youtube = googleapiclient.discovery.build(
     api_service_name, api_version, credentials=credentials)
 
 def addToPlaylist(video_id):
+    """
+    Add a video to a specified playlist
+    """
     request = youtube.playlistItems().insert(
         part="snippet",
         body={
