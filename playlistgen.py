@@ -23,6 +23,9 @@ youtube = googleapiclient.discovery.build(
     api_service_name, api_version, credentials=credentials)
 
 def addToPlaylist(video_id, playlist_id):
+    """
+    Add a video to a specified playlist
+    """
     request = youtube.playlistItems().insert(
         part="snippet",
         body={
