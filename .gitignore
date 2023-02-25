@@ -13,3 +13,6 @@
 /token.env
 /visualize.py
 /webscraper.py
+*.rs
+*.exe
+*.pdb
