@@ -16,3 +16,4 @@
 *.rs
 *.exe
 *.pdb
+/rust_adventures/
