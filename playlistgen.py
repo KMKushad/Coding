@@ -1,5 +1,6 @@
 import os
 import time
+import sys
 
 import google_auth_oauthlib.flow
 import googleapiclient.discovery
@@ -40,8 +41,6 @@ def addToPlaylist(video_id, playlist_id):
     )
     response = request.execute()
 
-    print(response)
-
 def search(topic):
     """
     Search up videos in a specified topic.
@@ -81,7 +80,11 @@ def makePlaylist():
     return response['id']
 
 def main():
-    playlistId = makePlaylist()
+    if sys.argv[1]:
+      playlistId = sys.argv[1]
+
+    else:  
+      playlistId = makePlaylist()
 
     input = open("input.txt", "r")
 
